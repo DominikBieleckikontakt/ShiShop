@@ -2,32 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.cl-formButtonPrimary {
+  @apply bg-primary;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.cl-card,
+.cl-socialButtonsBlockButton,
+.cl-alert,
+.cl-identityPreview,
+.cl-phoneInputBox {
+  @apply bg-[#efefef] dark:bg-[#222222];
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.cl-socialButtonsBlockButton {
+  @apply dark:border-[#444444];
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.cl-footerActionLink {
+  @apply text-primary underline hover:text-primary/90;
+}
+
+.cl-headerTitle,
+.cl-socialButtonsBlockButtonText,
+.cl-loading,
+.cl-formFieldLabel,
+.cl-formHeaderTitle,
+.cl-selectButton__countryCode,
+.cl-selectButton__countryCode p,
+.cl-selectOption p,
+.cl-selectOption div {
+  @apply dark:text-white text-black;
+}
+
+.cl-headerSubtitle,
+.cl-dividerText,
+.cl-footerActionText,
+.cl-alertText,
+.cl-formFieldInfoText,
+.cl-formFieldSuccessText,
+.cl-identityPreviewText,
+.cl-formHeaderSubtitle {
+  @apply text-black dark:text-white;
+}
+
+.cl-dividerLine {
+  @apply bg-slate-500 dark:bg-whiteDirty;
+}
+
+.cl-formFieldInput {
+  @apply flex h-10 w-full rounded-md border border-whiteDirty dark:border-[#222222] bg-[#ffffff] dark:bg-[#444444] px-3 py-2 text-slate-500 dark:text-whiteDirty file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 dark:placeholder:text-whiteDirty disabled:opacity-50;
 }
