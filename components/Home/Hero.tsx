@@ -19,7 +19,7 @@ const Hero = () => {
         whileInView="visible"
         transition={{
           ease: "easeInOut",
-          duration: 1,
+          duration: 1.5,
         }}
         viewport={{ amount: 0, once: true }}
         className="rounded-xl flex flex-col items-center justify-center mx-5"
@@ -39,19 +39,20 @@ const Hero = () => {
             typeSpeed={60}
             showCursor={false}
             className="mx-1"
+            startDelay={800}
           />
           <ReactTyped
             strings={["Love,"]}
             typeSpeed={60}
             showCursor={false}
-            startDelay={800}
+            startDelay={1600}
             className="mx-1"
           />
           <ReactTyped
             strings={["Passion"]}
             typeSpeed={60}
             showCursor={false}
-            startDelay={1400}
+            startDelay={2100}
             className="mx-1"
           />
         </div>
