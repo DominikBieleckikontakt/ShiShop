@@ -25,7 +25,16 @@ const PCNavBar = () => {
           </Link>
         </p>
         <p className="text-xl font-light pl-5">
-          <Link href="/contact-us" className="duration-500 hover:text-accent">
+          <Link
+            href="#contact-section"
+            className="duration-500 hover:text-accent"
+            onClick={(e) => {
+              e.preventDefault();
+              document
+                .getElementById("contact-section")!
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             Contact Us
           </Link>
         </p>
@@ -46,7 +55,7 @@ const PCNavBar = () => {
               variant="outline"
               size="lg"
               asChild
-              className="border-primary dark:border-primary dark:text-white hover:bg-[#2e2e2e] hover:dark:bg-[#2e2e2e] hover:scale-105 mr-5 hover:text-white"
+              className="border-primary dark:border-primary text-black bg-white hover:bg-whiteDirty dark:text-white dark:bg-transparent hover:dark:bg-[#2e2e2e] hover:scale-105 mr-5 dark:hover:text-white"
             >
               <Link href="sign-in">Log in</Link>
             </Button>

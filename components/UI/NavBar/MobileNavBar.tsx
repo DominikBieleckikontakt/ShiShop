@@ -11,11 +11,13 @@ import { SignOutButton, useAuth } from "@clerk/nextjs";
 const MobileNavBar = () => {
   const { setTheme, theme } = useTheme();
   const [isHidden, setIsHidden] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
   const { userId } = useAuth();
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
     theme === "light" && setTheme("dark");
+    setIsToggled(!isToggled);
   };
 
   return (
@@ -23,7 +25,7 @@ const MobileNavBar = () => {
       {isHidden ? (
         <div className="flex justify-between">
           <div onClick={() => setIsHidden(false)} className="cursor-pointer">
-            {theme === "dark" ? (
+            {theme === "dark" || isToggled === false ? (
               <Image
                 src="/icons/menu-white.svg"
                 alt="menu"
@@ -81,14 +83,27 @@ const MobileNavBar = () => {
             </div>
             <div className="flex flex-col">
               <p className="text-xl font-light my-2">
-                <Link href="/" className="hover:text-accent duration-500 ">
+                <Link
+                  href="/"
+                  className="hover:text-accent duration-500 "
+                  onClick={() => {
+                    setIsHidden(true);
+                  }}
+                >
                   Home
                 </Link>
               </p>
               <p className="text-xl font-light my-2">
                 <Link
-                  href="/contact-us"
+                  href="#contact-section"
                   className="duration-500 hover:text-accent"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsHidden(true);
+                    document
+                      .getElementById("contact-section")!
+                      .scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
                   Contact Us
                 </Link>
