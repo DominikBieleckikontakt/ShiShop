@@ -29,8 +29,7 @@ export default function RootLayout({
         <body className={cn("font-sans scroll-smooth", fontSans.variable)}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
-            enableSystem
+            defaultTheme="light"
             disableTransitionOnChange
           >
             <ClerkProvider

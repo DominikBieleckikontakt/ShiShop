@@ -25,7 +25,7 @@ const MobileNavBar = () => {
       {isHidden ? (
         <div className="flex justify-between">
           <div onClick={() => setIsHidden(false)} className="cursor-pointer">
-            {theme === "dark" || isToggled === false ? (
+            {theme === "dark" || isToggled === true ? (
               <Image
                 src="/icons/menu-white.svg"
                 alt="menu"
