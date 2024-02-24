@@ -3,11 +3,27 @@ import Image from "next/image";
 import React from "react";
 
 import { ReactTyped } from "react-typed";
+import { MotionDiv } from "../UI/MotionDiv";
+
+const variants = {
+  hidden: { opacity: 0, translateY: "50%" },
+  visible: { opacity: 1, translateY: "0%" },
+};
 
 const Hero = () => {
   return (
     <div className="h-[calc(100svh-5rem)] w-full">
-      <div className="rounded-xl flex flex-col items-center justify-center mx-5">
+      <MotionDiv
+        variants={variants}
+        initial="hidden"
+        whileInView="visible"
+        transition={{
+          ease: "easeInOut",
+          duration: 1,
+        }}
+        viewport={{ amount: 0, once: true }}
+        className="rounded-xl flex flex-col items-center justify-center mx-5"
+      >
         <Image
           alt="company logo"
           src={`/icons/primary-logo.svg`}
@@ -39,7 +55,7 @@ const Hero = () => {
             className="mx-1"
           />
         </div>
-      </div>
+      </MotionDiv>
     </div>
   );
 };
