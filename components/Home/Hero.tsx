@@ -4,6 +4,7 @@ import React from "react";
 
 import { ReactTyped } from "react-typed";
 import { MotionDiv } from "../UI/MotionDiv";
+import ImagesBackground from "./ImagesBackground";
 
 const variants = {
   hidden: { opacity: 0, translateY: "50%" },
@@ -12,11 +13,11 @@ const variants = {
 
 const Hero = () => {
   return (
-    <div className="h-[calc(100svh-5rem)] w-full">
+    <div className="h-[calc(100svh-5rem)] overflow-hidden relative">
       <MotionDiv
         variants={variants}
         initial="hidden"
-        whileInView="visible"
+        animate="visible"
         transition={{
           ease: "easeInOut",
           duration: 1.5,
@@ -33,7 +34,7 @@ const Hero = () => {
           className="rounded-xl mt-10"
         />
         <div className="my-5 text-5xl lg:text-8xl text-primary">Shi-Shop</div>
-        <div className="md:flex-row flex flex-col my-10 text-3xl lg:text-6xl font-light italic text-accent">
+        <div className="flex-row flex my-10 text-3xl lg:text-6xl font-light italic text-accent">
           <ReactTyped
             strings={["Ambition,"]}
             typeSpeed={60}
@@ -57,6 +58,7 @@ const Hero = () => {
           />
         </div>
       </MotionDiv>
+      <ImagesBackground />
     </div>
   );
 };

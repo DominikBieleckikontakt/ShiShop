@@ -1,8 +1,10 @@
 import { InfoSection } from "@/components/server";
+import ImagesBackground from "./ImagesBackground";
+import Image from "next/image";
 
 const Sections = () => {
   return (
-    <>
+    <div className="relative">
       <InfoSection title="Who are we?">
         Welcome to the creative minds behind{" "}
         <b className="text-accent">ShiShop</b>! Our dedicated team of passionate
@@ -16,6 +18,20 @@ const Sections = () => {
         discover the result of our collaborative efforts to redefine the world
         of T-shirt fashion.
       </InfoSection>
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className={`opacity-20 absolute top-2 md:top-[15rem] md:-left-[5rem] sm:size-48 md:size-48 xl:-left-[10rem] xl:top-[5rem] rotate-45`}
+      />
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className="opacity-20 absolute top-[15rem] left-[8rem] sm:top-[15rem] sm:left-[25rem] md:top-[4rem] md:left-[30rem] lg:left-[40rem] xl:top-[5rem] xl:left-[50rem] 2xl:-top-[4rem] 2xl:left-[50rem] size-32 md:size-64 -rotate-[35deg]"
+      />
       <InfoSection title="Our history">
         Established in 2018 by a group of friends with a penchant for creativity
         and fashion, <b className="text-accent">ShiShop</b> has a whimsical
@@ -45,6 +61,13 @@ const Sections = () => {
         power of passion, friendship, and the belief that a simple idea can
         blossom into a thriving online T-shirt haven.
       </InfoSection>
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className={`opacity-20 absolute top-[50rem] md:top-[45rem] md:-left-[5rem] sm:size-96 md:size-96 xl:left-[5rem] xl:top-[30rem] -rotate-[50deg]`}
+      />
       <InfoSection title="Our products">
         <b className="text-accent">ShiShop</b>, where quality meets creativity!
         Our commitment to providing exceptional products begins with our premium
@@ -72,6 +95,20 @@ const Sections = () => {
         Join us on this journey, as we continue to redefine the world of
         wearable art.
       </InfoSection>
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className={`opacity-20 absolute left-[10rem] top-[140rem] sm:top-[90rem] sm:left-[20rem] md:top-[80rem] md:left-[15rem] sm:size-96 md:size-64 xl:left-[30rem] xl:top-[70rem] 2xl:left-[50rem] rotate-[50deg]`}
+      />
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className="opacity-20 absolute top-[120rem] left-0 sm:top-[100rem] sm:left-0 md:top-[100rem] md:-left-10 lg:left-0 xl:top-[90rem] xl:left-0 2xl:top-[80rem] 2xl:left-0 size-32 md:size-64 -rotate-[35deg]"
+      />
       <InfoSection title="Contact Us" id="contact-section">
         Have a question, comment, or just want to share your love for our
         T-shirts? We'd love to hear from you! Get in touch with the ShiShop team
@@ -104,7 +141,7 @@ const Sections = () => {
         collaboration inquiries, or just to say hello! We look forward to
         connecting with our amazing community of T-shirt enthusiasts.
       </InfoSection>
-    </>
+    </div>
   );
 };
 

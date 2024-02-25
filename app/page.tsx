@@ -3,7 +3,7 @@ import { Sections } from "@/components/server";
 
 export default function Home() {
   return (
-    <main className="w-full">
+    <main className="w-full overflow-x-hidden overflow-y-hidden">
       <Hero />
       <div className="mx-5 sm:mx-20 md:mx-[10rem] lg:mx-[14rem] xl:mx-[20rem] 2xl:mx-[25rem]">
         <Sections />

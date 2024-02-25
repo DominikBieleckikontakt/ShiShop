@@ -28,19 +28,6 @@ const InfoSection = ({ title, image, children, id }: InfoSectionProps) => {
           <div className="h-2 w-5 bg-primary rounded ml-2" />
           <div className="h-2 w-3 bg-primary rounded ml-2" />
         </div>
-      </MotionDiv>
-
-      <MotionDiv
-        variants={variants}
-        initial="hidden"
-        whileInView="visible"
-        transition={{
-          ease: "easeInOut",
-          duration: 0.8,
-          delay: 0.1,
-        }}
-        viewport={{ amount: 0, once: true }}
-      >
         <p>{children}</p>
         {image && <Image src="" width={0} height={0} alt="" />}
       </MotionDiv>
