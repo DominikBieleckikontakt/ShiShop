@@ -94,18 +94,8 @@ const MobileNavBar = () => {
                 </Link>
               </p>
               <p className="text-xl font-light my-2">
-                <Link
-                  href="#contact-section"
-                  className="duration-500 hover:text-accent"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsHidden(true);
-                    document
-                      .getElementById("contact-section")!
-                      .scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  Contact Us
+                <Link href="/shop" className="duration-500 hover:text-accent">
+                  Shop
                 </Link>
               </p>
             </div>

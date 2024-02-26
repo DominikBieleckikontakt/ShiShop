@@ -8,6 +8,9 @@ export type InfoSectionProps = {
     rounded?: boolean;
     onRight?: boolean;
     onBottom?: boolean;
+    size?: number;
+    width?: number;
+    height?: number;
   };
   children: React.ReactNode;
   id?: string;

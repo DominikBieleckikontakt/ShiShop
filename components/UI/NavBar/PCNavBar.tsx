@@ -25,17 +25,8 @@ const PCNavBar = () => {
           </Link>
         </p>
         <p className="text-xl font-light pl-5">
-          <Link
-            href="#contact-section"
-            className="duration-500 hover:text-accent"
-            onClick={(e) => {
-              e.preventDefault();
-              document
-                .getElementById("contact-section")!
-                .scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Contact Us
+          <Link href="/shop" className="duration-500 hover:text-accent">
+            Shop
           </Link>
         </p>
       </div>

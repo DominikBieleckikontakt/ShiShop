@@ -5,7 +5,16 @@ import Image from "next/image";
 const Sections = () => {
   return (
     <div className="relative">
-      <InfoSection title="Who are we?">
+      <InfoSection
+        title="Who are we?"
+        image={{
+          alt: "photo of creators",
+          src: "/images/photo-creators.png",
+          rounded: true,
+          size: 64,
+          onRight: true,
+        }}
+      >
         Welcome to the creative minds behind{" "}
         <b className="text-accent">ShiShop</b>! Our dedicated team of passionate
         individuals came together with a shared love for unique and expressive
@@ -32,7 +41,15 @@ const Sections = () => {
         height={150}
         className="opacity-20 absolute top-[15rem] left-[8rem] sm:top-[15rem] sm:left-[25rem] md:top-[4rem] md:left-[30rem] lg:left-[40rem] xl:top-[5rem] xl:left-[50rem] 2xl:-top-[4rem] 2xl:left-[50rem] size-32 md:size-64 -rotate-[35deg]"
       />
-      <InfoSection title="Our history">
+      <InfoSection
+        title="Our history"
+        image={{
+          alt: "photo of creators",
+          src: "/images/photo-meeting.png",
+          width: 600,
+          height: 200,
+        }}
+      >
         Established in 2018 by a group of friends with a penchant for creativity
         and fashion, <b className="text-accent">ShiShop</b> has a whimsical
         origin story that begins with a backyard barbecue where the idea was

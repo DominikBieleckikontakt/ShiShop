@@ -13,7 +13,7 @@ const variants = {
 
 const Hero = () => {
   return (
-    <div className="overflow-hidden relative -z-10 pb-24">
+    <div className="overflow-hidden relative -z-10 pb-24 min-h-[calc(100svh-10rem)]">
       <MotionDiv
         variants={variants}
         initial="hidden"

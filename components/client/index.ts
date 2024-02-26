@@ -5,6 +5,7 @@ import MobileNavBar from "../UI/NavBar/MobileNavBar";
 import Hero from "../Home/Hero";
 import { MotionDiv } from "../UI/MotionDiv";
 import ImagesBackground from "../Home/ImagesBackground";
+import { ShopCarousel } from "../UI/ShopCarouler";
 
 export {
   ReactQueryProvider,
@@ -14,4 +15,5 @@ export {
   Hero,
   MotionDiv,
   ImagesBackground,
+  ShopCarousel,
 };
