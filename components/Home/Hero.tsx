@@ -13,7 +13,7 @@ const variants = {
 
 const Hero = () => {
   return (
-    <div className="h-[calc(100svh-20rem)] sm:h-[calc(100svh-10rem)] md:h-[calc(100svh-10rem)] lg:h-[calc(100svh-15rem)] overflow-hidden relative -z-10">
+    <div className="overflow-hidden relative -z-10 pb-24">
       <MotionDiv
         variants={variants}
         initial="hidden"
@@ -35,7 +35,7 @@ const Hero = () => {
         <div className="mt-5 text-5xl sm:text-7xl lg:text-8xl text-primary">
           Shi-Shop
         </div>
-        <div className="flex-row flex mt-5 text-3xl sm:text-5xl md:text-6xl font-light italic text-accent">
+        <div className="flex-col sm:flex-row flex mt-5 text-3xl sm:text-5xl md:text-6xl font-light italic text-accent">
           <ReactTyped
             strings={["Ambition,"]}
             typeSpeed={60}
