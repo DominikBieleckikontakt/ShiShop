@@ -13,7 +13,7 @@ const variants = {
 
 const Hero = () => {
   return (
-    <div className="h-[calc(100svh-5rem)] overflow-hidden relative -z-10">
+    <div className="h-[calc(100svh-20rem)] sm:h-[calc(100svh-10rem)] md:h-[calc(100svh-10rem)] lg:h-[calc(100svh-15rem)] overflow-hidden relative -z-10">
       <MotionDiv
         variants={variants}
         initial="hidden"
@@ -30,11 +30,12 @@ const Hero = () => {
           src={`/icons/primary-logo.svg`}
           width={400}
           height={400}
-          style={{ objectFit: "contain" }}
-          className="rounded-xl mt-10"
+          className="rounded-xl mt-10 size-36 sm:size-64 md:size-72 lg:size-84"
         />
-        <div className="my-5 text-5xl lg:text-8xl text-primary">Shi-Shop</div>
-        <div className="flex-row flex my-10 text-3xl lg:text-6xl font-light italic text-accent">
+        <div className="mt-5 text-5xl sm:text-7xl lg:text-8xl text-primary">
+          Shi-Shop
+        </div>
+        <div className="flex-row flex mt-5 text-3xl sm:text-5xl md:text-6xl font-light italic text-accent">
           <ReactTyped
             strings={["Ambition,"]}
             typeSpeed={60}

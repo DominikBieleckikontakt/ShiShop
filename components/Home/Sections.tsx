@@ -141,6 +141,20 @@ const Sections = () => {
         collaboration inquiries, or just to say hello! We look forward to
         connecting with our amazing community of T-shirt enthusiasts.
       </InfoSection>
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className={`opacity-20 absolute -left-[5rem] top-[160rem] sm:top-[140rem] sm:left-[20rem] md:top-[140rem] md:left-[25rem] lg:top-[120rem] lg:left-[35rem] sm:size-72 md:size-64 xl:left-[30rem] xl:top-[120rem] 2xl:top-[100rem] 2xl:left-[40rem] -rotate-[140deg]`}
+      />
+      <Image
+        alt="tshirt"
+        src="/icons/tshirt-black.svg"
+        width={150}
+        height={150}
+        className="opacity-20 absolute top-[140rem] left-96 sm:top-[140rem] sm:-left-[5rem] md:top-[155rem] md:-left-10 lg:top-[130rem] lg:-left-[10rem] xl:top-[140rem] xl:left-0 2xl:top-[120rem] 2xl:-left-[10rem] size-48 md:size-64 -rotate-[35deg]"
+      />
     </div>
   );
 };
