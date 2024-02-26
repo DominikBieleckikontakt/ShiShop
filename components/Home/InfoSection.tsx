@@ -31,7 +31,7 @@ const InfoSection = ({ title, image, children, id }: InfoSectionProps) => {
         <div
           className={`flex ${
             image?.onRight
-              ? "sm:flex-row sm:items-center"
+              ? "flex-col sm:flex-row sm:items-center"
               : "flex-col justify-center"
           }`}
         >
@@ -44,7 +44,7 @@ const InfoSection = ({ title, image, children, id }: InfoSectionProps) => {
               alt={image.alt}
               className={`mx-auto ${
                 image.rounded && "rounded-full"
-              } size-${image.size?.toString()} ${
+              } size-${image.size?.toString()} max-sm:mt-10 ${
                 !image.onRight && "mt-10 rounded-lg"
               }`}
             />
