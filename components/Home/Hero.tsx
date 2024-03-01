@@ -3,8 +3,8 @@ import Image from "next/image";
 import React from "react";
 
 import { ReactTyped } from "react-typed";
-import { MotionDiv } from "../UI/MotionDiv";
-import ImagesBackground from "./ImagesBackground";
+import { MotionDiv } from "../client";
+import { ImagesBackground } from "../client";
 
 const variants = {
   hidden: { opacity: 0, translateY: "50%" },

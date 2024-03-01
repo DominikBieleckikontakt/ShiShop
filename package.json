@@ -11,7 +11,9 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
     "@clerk/themes": "^1.7.9",
+    "@prisma/client": "^5.10.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@supabase/supabase-js": "^2.39.7",
     "@tanstack/react-query": "^5.22.2",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
@@ -21,6 +23,7 @@
     "lucide-react": "^0.331.0",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
+    "prisma": "^5.10.2",
     "react": "^18",
     "react-dom": "^18",
     "react-typed": "^2.0.12",

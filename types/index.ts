@@ -15,3 +15,12 @@ export type InfoSectionProps = {
   children: React.ReactNode;
   id?: string;
 };
+
+export type Product = {
+  id: bigint;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  sizes: string[];
+};

@@ -1,12 +1,12 @@
-import { ShopCarousel } from "@/components/client";
+import { CustomCarousel, ShopPanel } from "@/components/server";
 import React from "react";
 
 const page = () => {
   return (
-    <div>
-      <ShopCarousel />
-      <p>Oliwcia jest najlepsza</p>
-    </div>
+    <main>
+      <CustomCarousel />
+      <ShopPanel />
+    </main>
   );
 };
 

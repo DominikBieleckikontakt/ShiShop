@@ -21,7 +21,7 @@ const MobileNavBar = () => {
   };
 
   return (
-    <nav className="p-10 px-6 sm:px-12 md:px-24 bg-whiteDirty dark:bg-darkDirty shadow-sm items-center">
+    <nav className="p-10 px-6 sm:px-12 md:px-24 bg-whiteDirty dark:bg-darkDirty shadow-sm items-center z-50 relative">
       {isHidden ? (
         <div className="flex justify-between">
           <div onClick={() => setIsHidden(false)} className="cursor-pointer">

@@ -1,0 +1,18 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("NEXT_PUBLIC_SUPABASE_PROJECT_URL")
+  directUrl         = env("DATABASE_URL") 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Products {
+  id          BigInt  @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  image       String
+  sizes       String[]
+}

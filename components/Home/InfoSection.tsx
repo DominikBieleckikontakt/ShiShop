@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { InfoSectionProps } from "@/types";
-import { MotionDiv } from "../UI/MotionDiv";
+import { MotionDiv } from "../client";
 
 const variants = {
   hidden: { opacity: 0, translateY: "50%" },
