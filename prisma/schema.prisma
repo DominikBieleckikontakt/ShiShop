@@ -1,7 +1,6 @@
 datasource db {
   provider          = "postgresql"
-  url               = env("NEXT_PUBLIC_SUPABASE_PROJECT_URL")
-  directUrl         = env("DATABASE_URL") 
+  url               = env("DATABASE_URL") 
 }
 
 generator client {
@@ -15,4 +14,5 @@ model Products {
   price       Float
   image       String
   sizes       String[]
+  categories  String[]
 }

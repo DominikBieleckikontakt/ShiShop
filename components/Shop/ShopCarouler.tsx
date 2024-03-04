@@ -34,14 +34,14 @@ export function ShopCarousel({
 
   return (
     <div className="flex justify-center flex-col items-center mt-10">
-      <Carousel setApi={setApi} className="max-w-[900px] mx-5">
+      <Carousel setApi={setApi} className="max-w-[1100px] mx-5">
         <CarouselContent>
           {imagesUrl.map((_, index) => (
             <CarouselItem key={index}>
               <Image
                 src={_.data.publicUrl}
                 alt="banner photo"
-                width={900}
+                width={1100}
                 height={800}
                 className="rounded-xl object-contain"
               />

@@ -5,6 +5,7 @@ import Sections from "../Home/Sections";
 import CustomCarousel from "../Shop/CustomCarousel";
 import ShopPanel from "../Shop/ShopPanel";
 import ProductsList from "../Shop/ProductsList";
+import CategoriesList from "../Shop/CategoriesList";
 
 export {
   Button,

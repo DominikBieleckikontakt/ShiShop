@@ -23,4 +23,6 @@ export type Product = {
   price: number;
   image: string;
   sizes: string[];
+  categories: string[];
+  elementIndex?: number;
 };
