@@ -36,6 +36,15 @@ const FilterButton = ({
     }
 
     setWarning("");
+
+    const allCategories = categories.map((categorie) => categorie.name);
+
+    onChangeFilters({
+      categories:
+        checkedCategories.length > 0 ? checkedCategories : allCategories,
+      minPrice: minValue,
+      maxPrice: maxValue,
+    });
   };
 
   return (

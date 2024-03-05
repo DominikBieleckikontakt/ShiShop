@@ -18,12 +18,16 @@ const ShopPanel = ({
   categories: { id: bigint; name: string }[];
 }) => {
   const [productFilter, setProductFilter] = useState("");
+  const [productCategoriesFilter, setProductCategoriesFilter] =
+    useState<FilterTypes>();
 
   const changeFilter = (filter: string) => {
     setProductFilter(filter);
   };
 
-  const changeCategoriesFilter = (filters: FilterTypes) => {};
+  const changeCategoriesFilter = (filters: FilterTypes) => {
+    setProductCategoriesFilter(filters);
+  };
 
   return (
     <div className="mx-auto flex flex-col mt-24 max-w-[1100px]">
@@ -47,7 +51,11 @@ const ShopPanel = ({
             onChangeFilters={changeCategoriesFilter}
           />
         </div>
-        <ProductsList filter={productFilter} products={products} />
+        <ProductsList
+          filter={productFilter}
+          categoriesFilter={productCategoriesFilter}
+          products={products}
+        />
       </MotionDiv>
     </div>
   );

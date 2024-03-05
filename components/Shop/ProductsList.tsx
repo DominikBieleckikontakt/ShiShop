@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 import ProductItem from "./ProductItem";
-import { Product } from "@/types";
+import { FilterTypes, Product } from "@/types";
 import { MotionDiv } from "../client";
 
 const variants = {
@@ -12,16 +13,65 @@ const variants = {
 const ProductsList = ({
   filter,
   products,
+  categoriesFilter,
 }: {
   filter: string;
   products: Product[];
+  categoriesFilter?: FilterTypes;
 }) => {
-  const filteredProducts = products.filter((item) =>
-    item.name
-      .toLocaleLowerCase()
-      .trim()
-      .includes(filter.toLocaleLowerCase().trim())
-  );
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+
+  useEffect(() => {
+    if (!categoriesFilter) {
+      setFilteredProducts(
+        products.filter((item) =>
+          item.name
+            .toLocaleLowerCase()
+            .trim()
+            .includes(filter.toLocaleLowerCase().trim())
+        )
+      );
+    }
+
+    if (categoriesFilter) {
+      if (categoriesFilter.maxPrice > 0) {
+        setFilteredProducts(
+          products
+            .filter((item) =>
+              item.name
+                .toLocaleLowerCase()
+                .trim()
+                .includes(filter.toLocaleLowerCase().trim())
+            )
+            .filter(
+              (item) =>
+                item.price >= categoriesFilter.minPrice &&
+                item.price <= categoriesFilter.maxPrice
+            )
+            .filter((item) =>
+              categoriesFilter.categories.some((value) =>
+                item.categories.includes(value)
+              )
+            )
+        );
+      } else {
+        setFilteredProducts(
+          products
+            .filter((item) =>
+              item.name
+                .toLocaleLowerCase()
+                .trim()
+                .includes(filter.toLocaleLowerCase().trim())
+            )
+            .filter((item) =>
+              categoriesFilter.categories.some((value) =>
+                item.categories.includes(value)
+              )
+            )
+        );
+      }
+    }
+  }, [filter, categoriesFilter, products]);
 
   return (
     <MotionDiv
