@@ -74,7 +74,7 @@ export function ShopCarousel({
         </div>
       ) : (
         <div className="flex justify-center flex-col items-center mt-10">
-          <div className="max-w-[1100px] mx-5 bg-whiteDirty dark:bg-darkDirty py-10">
+          <div className="max-w-[1100px] mx-5 bg-whiteDirty dark:bg-darkDirty p-10 rounded-lg">
             There was a problem to load photos. <br />
             We are sorry for the problems.
           </div>
