@@ -10,6 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 export const getImages = async () => {
   const { data, error } = await supabase.storage.from("images").list();
   const arrayOfImagesUrl: Array<{ data: { publicUrl: string } }> = [];
+  console.log(data);
 
   data?.map((item) => {
     const url = supabase.storage.from("images").getPublicUrl(`${item.name}`);
