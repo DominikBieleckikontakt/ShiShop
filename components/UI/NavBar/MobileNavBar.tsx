@@ -24,7 +24,7 @@ const MobileNavBar = () => {
     <nav className="p-10 px-6 sm:px-12 md:px-24 bg-whiteDirty dark:bg-darkDirty shadow-sm items-center z-50 relative">
       {isHidden ? (
         <div className="flex justify-between">
-          <div onClick={() => setIsHidden(false)} className="cursor-pointer">
+          {/* <div onClick={() => setIsHidden(false)} className="cursor-pointer">
             {theme === "dark" || isToggled === true ? (
               <Image
                 src="/icons/menu-white.svg"
@@ -40,6 +40,15 @@ const MobileNavBar = () => {
                 height={42}
               />
             )}
+          </div> */}
+          <div className="cursor-pointer" onClick={() => setIsHidden(false)}>
+            <Image
+              src="/icons/menu-dark.svg"
+              alt="menu"
+              width={42}
+              height={42}
+              className="dark:invert"
+            />
           </div>
 
           <div className="flex items-center">
@@ -63,23 +72,13 @@ const MobileNavBar = () => {
         >
           <div className="bg-whiteDirty dark:bg-darkDirty absolute left-0 top-0 h-screen p-8 gap-8 z-50 flex flex-col w-56 items-start">
             <div onClick={() => setIsHidden(true)}>
-              {theme === "dark" ? (
-                <Image
-                  src="/icons/close-white.svg"
-                  alt="menu"
-                  width={42}
-                  height={42}
-                  className="mt-0 mb-8 text-3xl cursor-pointer"
-                />
-              ) : (
-                <Image
-                  src="/icons/close-dark.svg"
-                  alt="menu"
-                  width={42}
-                  height={42}
-                  className="mt-0 mb-8 text-3xl cursor-pointer"
-                />
-              )}
+              <Image
+                src="/icons/close-white.svg"
+                alt="menu"
+                width={42}
+                height={42}
+                className="mt-0 mb-8 text-3xl cursor-pointer dark:invert"
+              />
             </div>
             <div className="flex flex-col">
               <p className="text-xl font-light my-2">
@@ -94,7 +93,13 @@ const MobileNavBar = () => {
                 </Link>
               </p>
               <p className="text-xl font-light my-2">
-                <Link href="/shop" className="duration-500 hover:text-accent">
+                <Link
+                  href="/shop"
+                  className="duration-500 hover:text-accent"
+                  onClick={() => {
+                    setIsHidden(true);
+                  }}
+                >
                   Shop
                 </Link>
               </p>
