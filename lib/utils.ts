@@ -14,6 +14,7 @@ export const getImages = async () => {
   data?.map((item) => {
     const url = supabase.storage.from("images").getPublicUrl(`${item.name}`);
     arrayOfImagesUrl.push(url);
+    console.log(url);
   });
 
   return { arrayOfImagesUrl, error };
