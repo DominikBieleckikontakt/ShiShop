@@ -8,7 +8,7 @@ const variants = {
 };
 
 const CustomCarousel = async () => {
-  const imagesUrl = await getImages();
+  const { arrayOfImagesUrl, error } = await getImages();
 
   return (
     <MotionDiv
@@ -21,7 +21,7 @@ const CustomCarousel = async () => {
       }}
       viewport={{ amount: 0, once: true }}
     >
-      <ShopCarousel imagesUrl={imagesUrl} />
+      <ShopCarousel imagesUrl={arrayOfImagesUrl} error={error} />
     </MotionDiv>
   );
 };

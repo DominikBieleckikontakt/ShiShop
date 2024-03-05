@@ -16,7 +16,7 @@ export const getImages = async () => {
     arrayOfImagesUrl.push(url);
   });
 
-  return arrayOfImagesUrl;
+  return { arrayOfImagesUrl, error };
 };
 
 export const getProducts = async () => {
