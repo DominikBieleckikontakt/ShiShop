@@ -56,7 +56,7 @@ const MobileNavBar = () => {
           <div className="bg-whiteDirty dark:bg-darkDirty absolute left-0 top-0 h-screen p-8 gap-8 z-50 flex flex-col w-56 items-start">
             <div onClick={() => setIsHidden(true)}>
               <Image
-                src="/icons/close-white.svg"
+                src="/icons/close-dark.svg"
                 alt="menu"
                 width={42}
                 height={42}
@@ -94,6 +94,9 @@ const MobileNavBar = () => {
                   size="lg"
                   className="border-primary dark:border-primary dark:text-white hover:bg-primary hover:dark:bg-primary hover:scale-105 hover:text-white my-2"
                   asChild
+                  onClick={() => {
+                    setIsHidden(true);
+                  }}
                 >
                   <Link href="/sign-in">Log in</Link>
                 </Button>
@@ -101,6 +104,9 @@ const MobileNavBar = () => {
                   className="bg-primary dark:bg-primary dark:text-white hover:bg-accent hover:dark:bg-accent hover:scale-105 my-2"
                   size="lg"
                   asChild
+                  onClick={() => {
+                    setIsHidden(true);
+                  }}
                 >
                   <Link href="/sign-up">Sign up</Link>
                 </Button>
@@ -111,6 +117,9 @@ const MobileNavBar = () => {
                   variant="outline"
                   size="lg"
                   className="border-primary dark:border-primary dark:text-white hover:bg-primary hover:dark:bg-primary hover:scale-105 hover:text-white my-2"
+                  onClick={() => {
+                    setIsHidden(true);
+                  }}
                 >
                   Log Out
                 </Button>

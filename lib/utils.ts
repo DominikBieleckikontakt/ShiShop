@@ -10,19 +10,31 @@ export function cn(...inputs: ClassValue[]) {
 export const getImages = async () => {
   const { data, error } = await supabase.storage.from("images").list();
   const arrayOfImagesUrl: Array<{ data: { publicUrl: string } }> = [];
-  console.log(data);
 
   data?.map((item) => {
     const url = supabase.storage.from("images").getPublicUrl(`${item.name}`);
     arrayOfImagesUrl.push(url);
-    console.log(url);
   });
 
   return { arrayOfImagesUrl, error };
 };
 
 export const getProducts = async () => {
-  const products = await db.products.findMany();
+  const products = await db.products.findMany({
+    orderBy: {
+      id: "asc",
+    },
+  });
 
   return products;
+};
+
+export const getCategories = async () => {
+  const allCategories = await db.categories.findMany({
+    orderBy: {
+      id: "asc",
+    },
+  });
+
+  return allCategories;
 };

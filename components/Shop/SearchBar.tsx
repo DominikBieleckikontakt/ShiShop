@@ -14,14 +14,12 @@ const SearchBar = ({
   };
 
   return (
-    <div className="mb-10">
-      <input
-        className="rounded-lg bg-whiteDirty dark:bg-darkDirty outline-none p-3 w-full max-w-[400px]"
-        placeholder="Search for a product..."
-        value={filter}
-        onChange={changeFilter}
-      />
-    </div>
+    <input
+      className="rounded-lg bg-whiteDirty dark:bg-darkDirty outline-none p-3 w-full max-w-[400px] focus-visible:border-primary border border-transparent"
+      placeholder="Search for a product..."
+      value={filter}
+      onChange={changeFilter}
+    />
   );
 };
 

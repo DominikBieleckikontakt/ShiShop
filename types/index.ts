@@ -26,3 +26,9 @@ export type Product = {
   categories: string[];
   elementIndex?: number;
 };
+
+export type FilterTypes = {
+  categories: [];
+  minPrice: number;
+  maxPrice: number;
+};

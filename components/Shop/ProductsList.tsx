@@ -29,27 +29,32 @@ const ProductsList = ({
       initial="hidden"
       transition={{
         ease: "easeInOut",
-        duration: 1.5,
-        delay: 0.5,
+        duration: 1,
       }}
       viewport={{ amount: 0, once: true }}
       whileInView="visible"
     >
-      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        {filteredProducts.map((item, index) => (
-          <ProductItem
-            id={item.id}
-            elementIndex={index}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            image={item.image}
-            sizes={item.sizes}
-            categories={item.categories}
-            key={item.id}
-          />
-        ))}
-      </ul>
+      {filteredProducts.length > 0 ? (
+        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {filteredProducts.map((item, index) => (
+            <ProductItem
+              id={item.id}
+              elementIndex={index}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              image={item.image}
+              sizes={item.sizes}
+              categories={item.categories}
+              key={item.id}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div className="my-10 py-64 bg-darkDirty text-center text-xl rounded-lg">
+          There are no such products. Maybe try to find another one?
+        </div>
+      )}
     </MotionDiv>
   );
 };

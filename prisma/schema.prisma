@@ -1,6 +1,7 @@
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL") 
+  relationMode      = "prisma"  
 }
 
 generator client {
@@ -15,4 +16,9 @@ model Products {
   image       String
   sizes       String[]
   categories  String[]
+}
+
+model Categories {
+  id          BigInt @id @default(autoincrement())
+  name        String
 }

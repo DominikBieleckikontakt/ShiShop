@@ -7,6 +7,8 @@ import { MotionDiv } from "../UI/MotionDiv";
 import ImagesBackground from "../Home/ImagesBackground";
 import { ShopCarousel } from "../Shop/ShopCarouler";
 import ProductItem from "../Shop/ProductItem";
+import FilterButton from "../Shop/FilterButton";
+import { Checkbox } from "../UI/checkbox";
 
 export {
   ReactQueryProvider,
@@ -18,4 +20,6 @@ export {
   ImagesBackground,
   ShopCarousel,
   ProductItem,
+  FilterButton,
+  Checkbox,
 };
