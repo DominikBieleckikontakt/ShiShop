@@ -6,6 +6,7 @@ import CustomCarousel from "../Shop/CustomCarousel";
 import ShopPanel from "../Shop/ShopPanel";
 import ProductsList from "../Shop/ProductsList";
 import CategoriesList from "../Shop/CategoriesList";
+import Loader from "../UI/Loader";
 
 export {
   Button,
@@ -15,4 +16,5 @@ export {
   CustomCarousel,
   ShopPanel,
   ProductsList,
+  Loader,
 };

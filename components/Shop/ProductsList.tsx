@@ -74,16 +74,17 @@ const ProductsList = ({
   }, [filter, categoriesFilter, products]);
 
   return (
-    <MotionDiv
-      variants={variants}
-      initial="hidden"
-      transition={{
-        ease: "easeInOut",
-        duration: 1,
-      }}
-      viewport={{ amount: 0, once: true }}
-      whileInView="visible"
-    >
+    // <MotionDiv
+    //   variants={variants}
+    //   initial="hidden"
+    //   transition={{
+    //     ease: "easeInOut",
+    //     duration: 1,
+    //   }}
+    //   viewport={{ amount: 0, once: true }}
+    //   whileInView="visible"
+    // >
+    <>
       {filteredProducts.length > 0 ? (
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {filteredProducts.map((item, index) => (
@@ -105,7 +106,8 @@ const ProductsList = ({
           There are no such products. Maybe try to find another one?
         </div>
       )}
-    </MotionDiv>
+      {/* </MotionDiv> */}
+    </>
   );
 };
 

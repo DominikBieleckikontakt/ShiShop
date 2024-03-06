@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,7 @@ import {
   type CarouselApi,
 } from "../UI/carousel";
 import Image from "next/image";
+import { Loader } from "../server";
 
 export function ShopCarousel({
   imagesUrl,
@@ -35,7 +36,7 @@ export function ShopCarousel({
   }, [api]);
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {!error ? (
         <div className="flex justify-center flex-col items-center mt-10">
           <Carousel setApi={setApi} className="max-w-[1100px] mx-5">
@@ -80,6 +81,6 @@ export function ShopCarousel({
           </div>
         </div>
       )}
-    </>
+    </Suspense>
   );
 }

@@ -45,6 +45,10 @@ const FilterButton = ({
       minPrice: minValue,
       maxPrice: maxValue,
     });
+
+    setCheckedCategories([]);
+
+    setIsOpen(false);
   };
 
   return (
@@ -96,7 +100,7 @@ const FilterButton = ({
                       <div key={index} className="flex items-center my-2">
                         <Checkbox
                           id={item.name}
-                          className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                          className="data-[state=checked]:bg-primary data-[state=checked]:border-primary dark:data-[state=checked]:bg-primary dark:data-[state=checked]:border-primary"
                           onCheckedChange={(checked) => {
                             return checked
                               ? setCheckedCategories((prev) => [
