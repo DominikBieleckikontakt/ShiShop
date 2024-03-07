@@ -1,29 +1,28 @@
 "use client";
-import React, { useState, Fragment, useRef } from "react";
+import React, { useState, Fragment } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "../server";
 import { Checkbox } from "../client";
-import { FilterTypes } from "@/types";
 
 const FilterButton = ({
   categories,
-  onChangeFilters,
 }: {
   categories: { id: bigint; name: string }[];
-  onChangeFilters: (filters: FilterTypes) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [warning, setWarning] = useState<string>("");
   const [checkedCategories, setCheckedCategories] = useState<Array<string>>([]);
-
-  const minValueRef = useRef<HTMLInputElement>(null);
-  const maxValueRef = useRef<HTMLInputElement>(null);
+  const [minValInput, setMinValInput] = useState("");
+  const [maxValInput, setMaxValInput] = useState("");
+  const pathname = usePathname();
+  const router = useRouter();
 
   const onConfirmHandler = () => {
-    const minValue = Number(minValueRef.current?.value);
-    const maxValue = Number(maxValueRef.current?.value);
+    const minValue = Number(minValInput);
+    const maxValue = Number(maxValInput);
 
     if (minValue !== 0 && maxValue === 0) {
       setWarning("First value shouldn't be greater or equal to the second one");
@@ -37,16 +36,23 @@ const FilterButton = ({
 
     setWarning("");
 
-    const allCategories = categories.map((categorie) => categorie.name);
+    const query = new URLSearchParams("");
 
-    onChangeFilters({
-      categories:
-        checkedCategories.length > 0 ? checkedCategories : allCategories,
-      minPrice: minValue,
-      maxPrice: maxValue,
+    checkedCategories.map((item) => {
+      query.append("categories", item);
     });
 
-    setCheckedCategories([]);
+    if (maxValue !== 0) {
+      if (minValue === 0) {
+        query.set("minPrice", "0");
+      }
+      query.set("minPrice", minValue.toString());
+      query.set("maxPrice", maxValue.toString());
+    }
+
+    router.push(`${pathname}?${query}`, {
+      scroll: false,
+    });
 
     setIsOpen(false);
   };
@@ -101,6 +107,7 @@ const FilterButton = ({
                         <Checkbox
                           id={item.name}
                           className="data-[state=checked]:bg-primary data-[state=checked]:border-primary dark:data-[state=checked]:bg-primary dark:data-[state=checked]:border-primary"
+                          checked={checkedCategories.includes(item.name)}
                           onCheckedChange={(checked) => {
                             return checked
                               ? setCheckedCategories((prev) => [
@@ -125,17 +132,19 @@ const FilterButton = ({
                       <input
                         type="number"
                         placeholder="From..."
-                        ref={minValueRef}
                         className="p-2 rounded-md outline-none"
-                      />{" "}
-                      -{" "}
+                        value={minValInput}
+                        onChange={(e) => setMinValInput(e.target.value)}
+                      />
+                      $ -{" "}
                       <input
                         type="number"
                         placeholder="To..."
-                        ref={maxValueRef}
                         className="p-2 rounded-md outline-none"
+                        value={maxValInput}
+                        onChange={(e) => setMaxValInput(e.target.value)}
                       />
-                      <p className="mt-1 text-sm text-red-600">{warning}</p>
+                      $<p className="mt-1 text-sm text-red-600">{warning}</p>
                     </div>
                   </div>
                   <div className="flex justify-end mt-5">

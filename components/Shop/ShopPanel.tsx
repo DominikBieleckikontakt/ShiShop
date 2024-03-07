@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ProductsList from "./ProductsList";
 import SearchBar from "./SearchBar";
-import { FilterTypes, Product } from "@/types";
+import { Product } from "@/types";
 import { FilterButton, MotionDiv } from "../client";
 
 const variants = {
@@ -18,15 +18,9 @@ const ShopPanel = ({
   categories: { id: bigint; name: string }[];
 }) => {
   const [productFilter, setProductFilter] = useState("");
-  const [productCategoriesFilter, setProductCategoriesFilter] =
-    useState<FilterTypes>();
 
   const changeFilter = (filter: string) => {
     setProductFilter(filter);
-  };
-
-  const changeCategoriesFilter = (filters: FilterTypes) => {
-    setProductCategoriesFilter(filters);
   };
 
   return (
@@ -46,15 +40,12 @@ const ShopPanel = ({
         <p className="text-4xl font-light mb-10 text-center">Our products</p>
         <div className="flex items-center gap-5 mb-10">
           <SearchBar onChangeFilter={changeFilter} />
-          <FilterButton
-            categories={categories}
-            onChangeFilters={changeCategoriesFilter}
-          />
+          <FilterButton categories={categories} />
         </div>
         <ProductsList
           filter={productFilter}
-          categoriesFilter={productCategoriesFilter}
           products={products}
+          allCategories={categories}
         />
       </MotionDiv>
     </div>

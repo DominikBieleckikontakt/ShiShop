@@ -32,3 +32,8 @@ export type FilterTypes = {
   minPrice: number;
   maxPrice: number;
 };
+
+export type Categorie = {
+  id: bigint;
+  name: string;
+};

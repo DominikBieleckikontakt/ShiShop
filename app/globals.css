@@ -7,7 +7,7 @@ body {
 }
 
 .cl-formButtonPrimary {
-  @apply bg-primary;
+  @apply bg-primary hover:bg-primary/90 hover:scale-[1.01] duration-300;
 }
 
 .cl-card,
@@ -55,4 +55,8 @@ body {
 
 .cl-formFieldInput {
   @apply flex h-10 w-full rounded-md border border-whiteDirty dark:border-[#222222] bg-[#ffffff] dark:bg-[#444444] px-3 py-2 text-slate-500 dark:text-whiteDirty file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 dark:placeholder:text-whiteDirty disabled:opacity-50;
+}
+
+.cl-internal-b3fm6y {
+  background-color: #9741c4;
 }
