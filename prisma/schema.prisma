@@ -1,7 +1,6 @@
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL") 
-  relationMode      = "prisma"  
 }
 
 generator client {
@@ -16,9 +15,38 @@ model Products {
   image       String
   sizes       String[]
   categories  String[]
+  cartItems   ProductInCart[]
+}
+
+model ProductInCart {
+  id        Int       @id @default(autoincrement())
+  cartId    BigInt
+  cart      Cart      @relation(fields: [cartId], references: [id])
+  productId BigInt
+  product   Products  @relation(fields: [productId], references: [id])
+  quantity  Int
 }
 
 model Categories {
   id          BigInt @id @default(autoincrement())
   name        String
+}
+
+model User {
+  id          String @id @unique
+  firstname   String?
+  lastname    String?
+  phone       Int?
+  email       String?
+  password    String?
+  cart        Cart?
+}
+
+model Cart {
+  id          BigInt          @id @default(autoincrement()) @unique
+  userId      String          @unique
+  user        User            @relation(fields: [userId], references: [id])
+  cartItems   ProductInCart[]
+  totalPrice  Int             @default(0)
+  totalItems  Int
 }
