@@ -8,7 +8,7 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 // TRY TO CHANGE URL ON CLERKE WEBSITE!!!!
 // CHECK CHAT GPT
 
-export async function handler(req: Request) {
+export async function POST(req: Request) {
   console.log("req");
 
   if (!WEBHOOK_SECRET) {
@@ -58,7 +58,3 @@ export async function handler(req: Request) {
 
   return new Response("", { status: 200 });
 }
-
-export const GET = handler;
-export const POST = handler;
-export const PUT = handler;
