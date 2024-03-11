@@ -40,3 +40,25 @@ export const getCategories = async () => {
 
   return allCategories;
 };
+
+export const checkIfUserExists = async (userId: string) => {
+  const userExists = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  if (userExists) {
+    return true;
+  }
+
+  return false;
+};
+
+export const createNewUser = async (userId: string) => {
+  const newUser = await db.user.create({
+    data: {
+      id: userId,
+    },
+  });
+};
