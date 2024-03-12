@@ -56,9 +56,27 @@ export const checkIfUserExists = async (userId: string) => {
 };
 
 export const createNewUser = async (userId: string) => {
-  const newUser = await db.user.create({
+  await db.user.create({
     data: {
       id: userId,
     },
   });
+
+  await db.cart.create({
+    data: {
+      userId,
+    },
+  });
+};
+
+export const isUserAdmin = async (userId: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  if (user) {
+    return user.isAdmin;
+  }
 };

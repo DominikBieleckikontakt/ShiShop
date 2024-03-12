@@ -2,13 +2,19 @@
 import React, { useState } from "react";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "../../server";
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 import { SignOutButton, useAuth } from "@clerk/nextjs";
 
-const MobileNavBar = () => {
+import { Button } from "../../server";
+import { navbarLinks } from "@/constants";
+
+const MobileNavBar = ({
+  isAdmin,
+}: {
+  isAdmin: string | boolean | null | undefined;
+}) => {
   const { setTheme, theme } = useTheme();
   const [isHidden, setIsHidden] = useState(true);
   const [isToggled, setIsToggled] = useState(false);
@@ -64,28 +70,32 @@ const MobileNavBar = () => {
               />
             </div>
             <div className="flex flex-col">
-              <p className="text-xl font-light my-2">
-                <Link
-                  href="/"
-                  className="hover:text-accent duration-500 "
-                  onClick={() => {
-                    setIsHidden(true);
-                  }}
-                >
-                  Home
-                </Link>
-              </p>
-              <p className="text-xl font-light my-2">
-                <Link
-                  href="/shop"
-                  className="duration-500 hover:text-accent"
-                  onClick={() => {
-                    setIsHidden(true);
-                  }}
-                >
-                  Shop
-                </Link>
-              </p>
+              {navbarLinks.map((item, index) => (
+                <p className="text-xl font-light my-2" key={index}>
+                  <Link
+                    href={item.url}
+                    className="hover:text-accent duration-500 "
+                    onClick={() => {
+                      setIsHidden(true);
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                </p>
+              ))}
+              {isAdmin && (
+                <p className="text-xl font-light my-2">
+                  <Link
+                    href={"/dashboard"}
+                    className="hover:text-accent duration-500 "
+                    onClick={() => {
+                      setIsHidden(true);
+                    }}
+                  >
+                    Dashboard
+                  </Link>
+                </p>
+              )}
             </div>
             {!userId ? (
               <div className="flex flex-col">

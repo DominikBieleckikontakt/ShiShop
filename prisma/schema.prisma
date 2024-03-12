@@ -8,23 +8,32 @@ generator client {
 }
 
 model Products {
-  id          BigInt  @id @default(autoincrement())
+  id          BigInt      @id @default(autoincrement())
   name        String
   description String
   price       Float
   image       String
   sizes       String[]
   categories  String[]
-  cartItems   ProductInCart[]
+  cartItems   CartItem?   
 }
 
-model ProductInCart {
-  id        Int       @id @default(autoincrement())
-  cartId    BigInt
-  cart      Cart      @relation(fields: [cartId], references: [id])
-  productId BigInt
-  product   Products  @relation(fields: [productId], references: [id])
-  quantity  Int
+// model ProductInCart {
+//   id        Int       @id @default(autoincrement())
+//   cartId    BigInt
+//   cart      Cart      @relation(fields: [cartId], references: [id])
+//   productId BigInt
+//   product   Products  @relation(fields: [productId], references: [id])
+//   quantity  Int
+// }
+
+model CartItem {
+  id          Int       @id @default(autoincrement()) @unique
+  product     Products  @relation(fields: [productId], references: [id])
+  productId   BigInt    @unique
+  cartId      BigInt
+  cart        Cart      @relation(fields: [cartId], references: [id])
+  quantity    Int
 }
 
 model Categories {
@@ -46,7 +55,7 @@ model Cart {
   id          BigInt          @id @default(autoincrement()) @unique
   userId      String          @unique
   user        User            @relation(fields: [userId], references: [id])
-  cartItems   ProductInCart[]
+  cartItems   CartItem[]
   totalPrice  Int             @default(0)
-  totalItems  Int
+  totalItems  Int             @default(0)
 }

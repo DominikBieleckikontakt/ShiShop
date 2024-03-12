@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <ReactQueryProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={cn("font-sans scroll-smooth", fontSans.variable)}>
           <ThemeProvider
             attribute="class"

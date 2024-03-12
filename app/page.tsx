@@ -1,21 +1,16 @@
-"use client";
 import { Hero } from "@/components/client";
 import { Sections } from "@/components/server";
-import { useAuth } from "@clerk/nextjs";
+import { checkIfUserExists, createNewUser } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
 
-export default function Home() {
-  const { userId } = useAuth();
+export default async function Home() {
+  const { userId } = auth();
 
   if (userId) {
-    fetch(`${process.env.WEBSITE_URL}/api/create-user`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-      }),
-    });
+    const isUserExisting = await checkIfUserExists(userId);
+    if (!isUserExisting) {
+      await createNewUser(userId);
+    }
   }
 
   return (

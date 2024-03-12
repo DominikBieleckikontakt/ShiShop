@@ -2,12 +2,18 @@
 import React from "react";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "../../server";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
 
-const PCNavBar = () => {
+import { Button } from "../../server";
+import { navbarLinks } from "@/constants";
+
+const PCNavBar = ({
+  isAdmin,
+}: {
+  isAdmin: string | boolean | null | undefined;
+}) => {
   const { setTheme, theme } = useTheme();
   const { userId } = useAuth();
 
@@ -19,16 +25,26 @@ const PCNavBar = () => {
   return (
     <nav className="p-10 px-6 sm:px-12 md:px-24 flex justify-between bg-whiteDirty dark:bg-darkDirty shadow-sm items-center">
       <div className="flex">
-        <p className="text-xl font-light pr-5">
-          <Link href="/" className="hover:text-accent duration-500 ">
-            Home
-          </Link>
-        </p>
-        <p className="text-xl font-light pl-5">
-          <Link href="/shop" className="duration-500 hover:text-accent">
-            Shop
-          </Link>
-        </p>
+        {navbarLinks.map((item, index) => (
+          <p className="text-xl font-light pr-5" key={index}>
+            <Link
+              href={`${item.url}`}
+              className="hover:text-accent duration-500 "
+            >
+              {item.name}
+            </Link>
+          </p>
+        ))}
+        {isAdmin && (
+          <p className="text-xl font-light pr-5">
+            <Link
+              href={`/dashboard`}
+              className="hover:text-accent duration-500 "
+            >
+              Dashboard
+            </Link>
+          </p>
+        )}
       </div>
       <div className="flex items-center">
         <Button

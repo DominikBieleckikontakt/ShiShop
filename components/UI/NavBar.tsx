@@ -1,14 +1,20 @@
 import React from "react";
 import { MobileNavBar, PCNavBar } from "../client";
+import { auth } from "@clerk/nextjs";
+import { isUserAdmin } from "@/lib/utils";
 
-const NavBar = () => {
+const NavBar = async () => {
+  const { userId } = auth();
+
+  const isAdmin = userId && (await isUserAdmin(userId));
+
   return (
     <>
       <div className="max-sm:block hidden">
-        <MobileNavBar />
+        <MobileNavBar isAdmin={isAdmin} />
       </div>
       <div className="max-sm:hidden block">
-        <PCNavBar />
+        <PCNavBar isAdmin={isAdmin} />
       </div>
     </>
   );
