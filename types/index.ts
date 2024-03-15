@@ -37,3 +37,8 @@ export type Categorie = {
   id: bigint;
   name: string;
 };
+
+export type MenuOptionsStore = {
+  title: string;
+  component?: React.JSX.Element;
+};

@@ -5,8 +5,9 @@ import Sections from "../Home/Sections";
 import CustomCarousel from "../Shop/CustomCarousel";
 import ShopPanel from "../Shop/ShopPanel";
 import ProductsList from "../Shop/ProductsList";
-import CategoriesList from "../Shop/CategoriesList";
+import AdminDashboard from "../Dashboard/AdminDashboard";
 import Loader from "../UI/Loader";
+import Menu from "../Dashboard/Menu";
 
 export {
   Button,
@@ -17,4 +18,6 @@ export {
   ShopPanel,
   ProductsList,
   Loader,
+  AdminDashboard,
+  Menu,
 };
