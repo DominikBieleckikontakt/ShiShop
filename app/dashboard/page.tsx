@@ -1,5 +1,6 @@
 import React from "react";
 import { auth } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
 
 import { isUserAdmin } from "@/lib/utils";
 import Link from "next/link";
@@ -11,7 +12,7 @@ const Dashboard = async () => {
   const isAdmin = userId && (await isUserAdmin(userId));
 
   return (
-    <main className="w-full">
+    <main className="w-full overflow-y-hidden">
       {!isAdmin && (
         <div className="mx-5 md:mx-auto max-w-[48rem] mt-48 p-5 rounded-lg bg-whiteDirty dark:bg-darkDirty text-center shadow-lg">
           <h1 className="text-2xl font-semibold">
@@ -30,6 +31,7 @@ const Dashboard = async () => {
         </div>
       )}
       {isAdmin && <AdminDashboard />}
+      <Toaster position="bottom-center" reverseOrder={false} />
     </main>
   );
 };

@@ -12,6 +12,7 @@ import { Checkbox } from "../UI/checkbox";
 import MobileMenu from "../Dashboard/MobileMenu";
 import PCMenu from "../Dashboard/PCMenu";
 import PanelDisplayer from "../Dashboard/PanelDisplayer";
+import Images from "../Dashboard/Carousel/Images";
 
 export {
   ReactQueryProvider,
@@ -28,4 +29,5 @@ export {
   MobileMenu,
   PCMenu,
   PanelDisplayer,
+  Images,
 };

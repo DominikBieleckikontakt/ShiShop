@@ -10,15 +10,32 @@ export function cn(...inputs: ClassValue[]) {
 export const getImages = async () => {
   const { data, error } = await supabase.storage
     .from("images")
-    .list(undefined, { limit: 10 });
+    .list("folder", { limit: 20 });
   const arrayOfImagesUrl: Array<{ data: { publicUrl: string } }> = [];
 
   data?.map((item) => {
-    const url = supabase.storage.from("images").getPublicUrl(`${item.name}`);
+    const url = supabase.storage
+      .from("images")
+      .getPublicUrl(`folder/${item.name}`);
     arrayOfImagesUrl.push(url);
   });
 
   return { arrayOfImagesUrl, error };
+};
+
+export const deleteImage = async (element: string, directory: string) => {
+  const fullPath = element;
+  const fileName = fullPath.slice(
+    fullPath.lastIndexOf("/") + 1,
+    fullPath.length
+  );
+  console.log(fileName);
+  const { data, error } = await supabase.storage
+    .from("images")
+    .remove([`${directory}/${fileName}`]);
+
+  console.log(data, error);
+  return { data, error };
 };
 
 export const getProducts = async () => {
