@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: false,
+  reactStrictMode: false,
   images: {
     domains: ["tzsldaeqbxedakdopfvn.supabase.co"],
     remotePatterns: [

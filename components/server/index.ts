@@ -8,6 +8,8 @@ import ProductsList from "../Shop/ProductsList";
 import AdminDashboard from "../Dashboard/AdminDashboard";
 import Loader from "../UI/Loader";
 import Menu from "../Dashboard/Menu";
+import ImageModal from "../Dashboard/Carousel/ImageModal";
+import Modal from "../UI/Modal";
 
 export {
   Button,
@@ -20,4 +22,6 @@ export {
   Loader,
   AdminDashboard,
   Menu,
+  ImageModal,
+  Modal,
 };

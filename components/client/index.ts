@@ -13,6 +13,7 @@ import MobileMenu from "../Dashboard/MobileMenu";
 import PCMenu from "../Dashboard/PCMenu";
 import PanelDisplayer from "../Dashboard/PanelDisplayer";
 import Images from "../Dashboard/Carousel/Images";
+import ImageElement from "../Dashboard/Carousel/ImageElement";
 
 export {
   ReactQueryProvider,
@@ -30,4 +31,5 @@ export {
   PCMenu,
   PanelDisplayer,
   Images,
+  ImageElement,
 };

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import ImageElement from "./ImageElement";
-import { deleteImage } from "@/lib/utils";
 import toast from "react-hot-toast";
+
+import { ImageElement } from "../../client";
+import { deleteImage } from "@/lib/utils";
 
 type imagesType = {
   data: { publicUrl: string };
@@ -11,7 +12,6 @@ type imagesType = {
 const Images = ({ allImages }: { allImages: imagesType[] }) => {
   const [images, setImages] = useState(allImages);
   const [errorMsg, setErrorMsg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-1 w-full">
@@ -25,7 +25,6 @@ const Images = ({ allImages }: { allImages: imagesType[] }) => {
             url={item.data.publicUrl}
             index={index}
             onDelete={async (index) => {
-              setIsLoading(true);
               toast.loading("Deleting... ", {
                 className: "dark:bg-[#222222] dark:text-white",
               });
@@ -51,7 +50,6 @@ const Images = ({ allImages }: { allImages: imagesType[] }) => {
                   className: "dark:bg-[#222222] dark:text-white",
                 });
               }
-              setIsLoading(false);
             }}
           />
         </div>
