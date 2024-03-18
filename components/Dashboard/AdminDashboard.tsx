@@ -17,7 +17,7 @@ const variants = {
 const AdminDashboard = () => {
   return (
     <MotionDiv
-      className="mx-5 max-md:flex-col md:mx-auto max-w-[64rem] mt-48 rounded-lg bg-whiteDirty dark:bg-darkDirty flex"
+      className="mx-5 max-md:flex-col md:mx-auto max-w-[64rem] my-48 rounded-lg bg-whiteDirty dark:bg-darkDirty flex shadow-lg"
       variants={variants}
       initial="hidden"
       animate="visible"

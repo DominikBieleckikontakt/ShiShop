@@ -2,6 +2,7 @@ import { supabase } from "./supabase";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { db } from "./prisma";
+import { v4 as uuidv4 } from "uuid";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -36,6 +37,19 @@ export const deleteImage = async (element: string, directory: string) => {
 
   console.log(data, error);
   return { data, error };
+};
+
+export const createImage = async (file: File, name: string) => {
+  const filename = `${uuidv4()}-${name.toLocaleLowerCase().trim()}`;
+
+  const { data, error } = await supabase.storage
+    .from("images")
+    .upload(`folder/${filename}`, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  return { error };
 };
 
 export const getProducts = async () => {

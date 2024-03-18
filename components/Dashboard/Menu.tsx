@@ -9,7 +9,7 @@ const Menu = ({ options }: { options: MenuOptionsStore[] }) => {
       <div className="max-md:hidden flex p-5 ">
         <PCMenu options={options} />
         <Separator
-          className="bg-primary dark:bg-primary ml-5"
+          className="bg-darkDirty dark:bg-whiteDirty ml-5"
           orientation="vertical"
         />
       </div>

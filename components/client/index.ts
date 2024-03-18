@@ -14,6 +14,8 @@ import PCMenu from "../Dashboard/PCMenu";
 import PanelDisplayer from "../Dashboard/PanelDisplayer";
 import Images from "../Dashboard/Carousel/Images";
 import ImageElement from "../Dashboard/Carousel/ImageElement";
+import { Label } from "../UI/label";
+import AddImage from "../Dashboard/Carousel/AddImage";
 
 export {
   ReactQueryProvider,
@@ -32,4 +34,6 @@ export {
   PanelDisplayer,
   Images,
   ImageElement,
+  Label,
+  AddImage,
 };

@@ -28,7 +28,7 @@ const Images = ({ allImages }: { allImages: imagesType[] }) => {
               toast.loading("Deleting... ", {
                 className: "dark:bg-[#222222] dark:text-white",
               });
-              const { data, error } = await deleteImage(
+              const { error } = await deleteImage(
                 allImages[index].data.publicUrl,
                 "folder"
               );

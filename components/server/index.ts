@@ -10,6 +10,7 @@ import Loader from "../UI/Loader";
 import Menu from "../Dashboard/Menu";
 import ImageModal from "../Dashboard/Carousel/ImageModal";
 import Modal from "../UI/Modal";
+import { Input } from "../UI/input";
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   Menu,
   ImageModal,
   Modal,
+  Input,
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { getImages } from "@/lib/utils";
-import { Images } from "../../client";
+import { Images, AddImage } from "../../client";
 
 const CarouselPanel = async () => {
   const { arrayOfImagesUrl, error } = await getImages();
@@ -20,6 +20,9 @@ const CarouselPanel = async () => {
           </div>
         </div>
       )}
+      <h2 className="text-xl font-light my-5 ">Add new image to carousel</h2>
+
+      <AddImage />
     </div>
   );
 };
