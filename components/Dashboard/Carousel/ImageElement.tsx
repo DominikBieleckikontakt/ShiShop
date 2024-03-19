@@ -27,9 +27,8 @@ const ImageElement = ({
   return (
     <Suspense fallback={<Loader />}>
       <div className="rounded-lg bg-white/50 dark:bg-[#222222]">
-        {isOpen && (
-          <ImageModal isOpen={isOpen} setIsOpen={setIsOpen} url={url} />
-        )}
+        <ImageModal isOpen={isOpen} setIsOpen={setIsOpen} url={url} />
+
         <Image
           src={url}
           alt={`Carousel image: ${index}`}

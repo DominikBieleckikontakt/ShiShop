@@ -7,7 +7,7 @@ const ProductsPanel = async () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-light">Manage available products</h1>
+      <h1 className="text-2xl font-light">Browse available products</h1>
       <ProductsTable products={products} />
     </div>
   );
