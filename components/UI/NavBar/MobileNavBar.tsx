@@ -9,6 +9,7 @@ import { SignOutButton, useAuth } from "@clerk/nextjs";
 
 import { Button } from "../../server";
 import { navbarLinks } from "@/constants";
+import { usePathname } from "next/navigation";
 
 const MobileNavBar = ({
   isAdmin,
@@ -19,6 +20,8 @@ const MobileNavBar = ({
   const [isHidden, setIsHidden] = useState(true);
   const [isToggled, setIsToggled] = useState(false);
   const { userId } = useAuth();
+
+  const pathname = usePathname();
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
@@ -74,7 +77,9 @@ const MobileNavBar = ({
                 <p className="text-xl font-light my-2" key={index}>
                   <Link
                     href={item.url}
-                    className="hover:text-accent duration-500 "
+                    className={`hover:text-accent duration-500 ${
+                      pathname === item.url && "text-accent"
+                    }`}
                     onClick={() => {
                       setIsHidden(true);
                     }}
@@ -87,7 +92,9 @@ const MobileNavBar = ({
                 <p className="text-xl font-light my-2">
                   <Link
                     href={"/dashboard"}
-                    className="hover:text-accent duration-500 "
+                    className={`hover:text-accent duration-500 ${
+                      pathname === "/dashboard" && "text-accent"
+                    }`}
                     onClick={() => {
                       setIsHidden(true);
                     }}

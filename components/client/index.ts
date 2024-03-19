@@ -16,6 +16,8 @@ import Images from "../Dashboard/Carousel/Images";
 import ImageElement from "../Dashboard/Carousel/ImageElement";
 import { Label } from "../UI/label";
 import AddImage from "../Dashboard/Carousel/AddImage";
+import EditProductsModal from "../Dashboard/Products/EditProductsModal";
+import ProductsTable from "../Dashboard/Products/ProductsTable";
 
 export {
   ReactQueryProvider,
@@ -36,4 +38,6 @@ export {
   ImageElement,
   Label,
   AddImage,
+  EditProductsModal,
+  ProductsTable,
 };

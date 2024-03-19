@@ -3,10 +3,11 @@ import React from "react";
 import { Menu } from "../server";
 import { MotionDiv, PanelDisplayer } from "../client";
 import CarouselPanel from "./Carousel/CarouselPanel";
+import ProductsPanel from "./Products/ProductsPanel";
 
 const options = [
   { title: "Carousel of images", component: <CarouselPanel /> },
-  { title: "Products", component: <>products</> },
+  { title: "Products", component: <ProductsPanel /> },
 ];
 
 const variants = {

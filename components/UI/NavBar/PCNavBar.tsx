@@ -8,6 +8,7 @@ import { SignOutButton } from "@clerk/nextjs";
 
 import { Button } from "../../server";
 import { navbarLinks } from "@/constants";
+import { usePathname } from "next/navigation";
 
 const PCNavBar = ({
   isAdmin,
@@ -16,6 +17,7 @@ const PCNavBar = ({
 }) => {
   const { setTheme, theme } = useTheme();
   const { userId } = useAuth();
+  const pathname = usePathname();
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
@@ -29,7 +31,9 @@ const PCNavBar = ({
           <p className="text-xl font-light pr-5" key={index}>
             <Link
               href={`${item.url}`}
-              className="hover:text-accent duration-500 "
+              className={`hover:text-accent duration-500 ${
+                pathname === item.url && "text-accent"
+              }`}
             >
               {item.name}
             </Link>
@@ -39,7 +43,9 @@ const PCNavBar = ({
           <p className="text-xl font-light pr-5">
             <Link
               href={`/dashboard`}
-              className="hover:text-accent duration-500 "
+              className={`hover:text-accent duration-500 ${
+                pathname === "/dashboard" && "text-accent"
+              }`}
             >
               Dashboard
             </Link>

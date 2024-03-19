@@ -11,6 +11,8 @@ import Menu from "../Dashboard/Menu";
 import ImageModal from "../Dashboard/Carousel/ImageModal";
 import Modal from "../UI/Modal";
 import { Input } from "../UI/input";
+import ProductsPanel from "../Dashboard/Products/ProductsPanel";
+import CarouselPanel from "../Dashboard/Carousel/CarouselPanel";
 
 export {
   Button,
@@ -26,4 +28,6 @@ export {
   ImageModal,
   Modal,
   Input,
+  ProductsPanel,
+  CarouselPanel,
 };
