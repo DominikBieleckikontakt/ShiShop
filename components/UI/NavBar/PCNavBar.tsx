@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
 
+import { useCartStore } from "@/lib/store";
 import { Button } from "../../server";
 import { navbarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
+import { Badge } from "../badge";
 
 const PCNavBar = ({
   isAdmin,
@@ -18,6 +20,7 @@ const PCNavBar = ({
   const { setTheme, theme } = useTheme();
   const { userId } = useAuth();
   const pathname = usePathname();
+  const totalAmount = useCartStore((state) => state.totalAmount);
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
@@ -53,6 +56,21 @@ const PCNavBar = ({
         )}
       </div>
       <div className="flex items-center">
+        <div className="relative">
+          <Button
+            variant="outline"
+            size="icon"
+            className="relative mr-2 md:mr-5 dark:bg-darkDirty hover:scale-105 bg-white border-slate-200 hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-50"
+            asChild
+          >
+            <Link href="/cart">
+              <ShoppingCart />
+              <Badge className="absolute top-5 left-6 px-[0.4rem]">
+                {totalAmount}
+              </Badge>
+            </Link>
+          </Button>
+        </div>
         <Button
           variant="outline"
           size="icon"

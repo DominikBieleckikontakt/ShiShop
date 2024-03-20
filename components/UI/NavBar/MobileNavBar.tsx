@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +10,8 @@ import { SignOutButton, useAuth } from "@clerk/nextjs";
 import { Button } from "../../server";
 import { navbarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
+import { useCartStore } from "@/lib/store";
+import { Badge } from "../badge";
 
 const MobileNavBar = ({
   isAdmin,
@@ -20,6 +22,7 @@ const MobileNavBar = ({
   const [isHidden, setIsHidden] = useState(true);
   const [isToggled, setIsToggled] = useState(false);
   const { userId } = useAuth();
+  const totalAmount = useCartStore((state) => state.totalAmount);
 
   const pathname = usePathname();
 
@@ -44,6 +47,21 @@ const MobileNavBar = ({
           </div>
 
           <div className="flex items-center">
+            <div className="relative">
+              <Button
+                variant="outline"
+                size="icon"
+                className="mr-2 md:mr-5 dark:bg-darkDirty hover:scale-105 bg-white border-slate-200 hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-50"
+                asChild
+              >
+                <Link href="/cart">
+                  <ShoppingCart />
+                  <Badge className="absolute top-5 left-6 px-[0.4rem]">
+                    {totalAmount}
+                  </Badge>
+                </Link>
+              </Button>
+            </div>
             <Button
               variant="outline"
               size="icon"
