@@ -1,10 +1,14 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
 
+import { useCartStore } from "@/lib/store";
 import { Product } from "@/types";
 import { Button } from "../server";
 import CategoriesList from "./CategoriesList";
+import { addItemToCart } from "@/lib/utils";
 
 const ProductItem = ({
   id,
@@ -14,6 +18,20 @@ const ProductItem = ({
   categories,
   elementIndex,
 }: Product) => {
+  const { userId } = useAuth();
+  const items = useCartStore((state) => state.items);
+  const totalAmount = useCartStore((state) => state.totalAmount);
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const setCart = useCartStore((state) => state.setCart);
+
+  const onAddToCartHandler = () => {
+    if (userId) {
+      // TO DO
+    } else {
+      addItemToCart(id, name, price, totalAmount, totalPrice, items, setCart);
+    }
+  };
+
   return (
     <li className="hover:scale-105 duration-300 cursor-pointer rounded-xl shadow-md flex flex-col justify-center bg-[#ffffff] dark:bg-darkDirty">
       <Link href="">
@@ -34,6 +52,7 @@ const ProductItem = ({
       <Button
         variant="outline"
         className="hover:bg-secondary bg-secondary bg-opacity-50 border-none w-full"
+        onClick={onAddToCartHandler}
       >
         <Image src="/icons/white-cart.svg" width={30} height={30} alt="cart" />
       </Button>

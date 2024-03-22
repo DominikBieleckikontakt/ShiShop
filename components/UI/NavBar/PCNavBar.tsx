@@ -22,6 +22,16 @@ const PCNavBar = ({
   const pathname = usePathname();
   const totalAmount = useCartStore((state) => state.totalAmount);
 
+  // GET DATA FROM LOCAL STORAGE AND PUT IN STATE
+  const setCart = useCartStore((state) => state.setCart);
+
+  if (typeof window !== "undefined" && !userId) {
+    const { items, totalAmount, totalPrice } = JSON.parse(
+      localStorage.getItem("cart")!
+    );
+    setCart(items, totalAmount, totalPrice);
+  }
+
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
     theme === "light" && setTheme("dark");

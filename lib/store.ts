@@ -5,7 +5,7 @@ type arrayIndex = {
   changeIndex: (currentIndex: number) => void;
 };
 
-type cartItem = {
+export type cartItem = {
   id: bigint;
   name: string;
   price: number;
@@ -17,7 +17,11 @@ type cartStoreType = {
   items: cartItem[];
   totalPrice: number;
   totalAmount: number;
-  setCart: (isUserLoggedIn: boolean) => void;
+  setCart: (
+    currentItems: cartItem[],
+    quantity: number,
+    totalPrice: number
+  ) => void;
 };
 
 export const useOptionsStore = create<arrayIndex>((set) => ({
@@ -31,5 +35,11 @@ export const useCartStore = create<cartStoreType>((set) => ({
   items: [],
   totalPrice: 0,
   totalAmount: 0,
-  setCart: (isUserLoggedIn: boolean) => {},
+  setCart: (currentItems, quantity, price) => {
+    set(() => ({
+      items: currentItems,
+      totalAmount: quantity,
+      totalPrice: price,
+    }));
+  },
 }));

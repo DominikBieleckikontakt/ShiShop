@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
+import { useCartStore } from "@/lib/store";
 import { ReactTyped } from "react-typed";
 import { MotionDiv } from "../client";
 import { ImagesBackground } from "../client";
