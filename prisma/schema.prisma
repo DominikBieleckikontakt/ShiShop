@@ -9,7 +9,7 @@ generator client {
 
 model Products {
   id          BigInt      @id @default(autoincrement())
-  name        String
+  name        String      
   description String
   price       Float
   image       String

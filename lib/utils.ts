@@ -161,3 +161,92 @@ export const addItemToCart = (
 };
 
 export const getCartFromLocalStorage = () => {};
+
+export const addItemToUserCart = async (
+  userId: string,
+  id: bigint,
+  name: string,
+  price: number
+) => {
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  const cart = await db.cart.findUnique({
+    where: {
+      userId: user?.id,
+    },
+  });
+
+  const product = await db.products.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  //  CHECK IF USER ALREADY HAS A CART
+
+  if (cart) {
+    const cartItems = await db.cartItem.findMany({
+      where: {
+        cartId: cart.id,
+      },
+    });
+
+    const isAlreadyInCart = cartItems.find(
+      (item) => item.productId === product?.id
+    );
+
+    // CHECK IF USER HAS ALREADY THIS ITEM IN A CART
+
+    if (isAlreadyInCart) {
+      const amount = isAlreadyInCart.quantity + 1;
+      const totalPrice = isAlreadyInCart.summedPrice + price;
+      await db.cartItem.updateMany({
+        where: {
+          cartId: cart.id,
+          productId: product?.id,
+        },
+        data: {
+          quantity: amount,
+          summedPrice: totalPrice,
+        },
+      });
+    } else {
+      await db.cartItem.create({
+        data: {
+          productId: product!.id,
+          cartId: cart.id,
+          quantity: 1,
+          summedPrice: price,
+        },
+      });
+    }
+    await db.cart.update({
+      where: {
+        userId: user!.id,
+      },
+      data: {
+        totalPrice: cart!.totalPrice + price,
+        totalItems: cart!.totalItems + 1,
+      },
+    });
+  } else {
+    await db.cart.create({
+      data: {
+        userId: user!.id,
+      },
+    });
+    await db.cart.update({
+      where: {
+        userId: user!.id,
+      },
+      data: {
+        totalPrice: cart!.totalPrice + price,
+        totalItems: cart!.totalItems + 1,
+      },
+    });
+  }
+};

@@ -8,7 +8,7 @@ import { useCartStore } from "@/lib/store";
 import { Product } from "@/types";
 import { Button } from "../server";
 import CategoriesList from "./CategoriesList";
-import { addItemToCart } from "@/lib/utils";
+import { addItemToCart, addItemToUserCart } from "@/lib/utils";
 
 const ProductItem = ({
   id,
@@ -24,9 +24,21 @@ const ProductItem = ({
   const totalPrice = useCartStore((state) => state.totalPrice);
   const setCart = useCartStore((state) => state.setCart);
 
-  const onAddToCartHandler = () => {
+  const onAddToCartHandler = async () => {
     if (userId) {
-      // TO DO
+      const uId = id.toString();
+      const res = await fetch(`/api/addToCart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId,
+          uId,
+          name,
+          price,
+        }),
+      });
     } else {
       addItemToCart(id, name, price, totalAmount, totalPrice, items, setCart);
     }
