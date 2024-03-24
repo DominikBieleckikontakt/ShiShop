@@ -97,6 +97,8 @@ export const createNewUser = async (userId: string) => {
   await db.cart.create({
     data: {
       userId,
+      totalItems: 0,
+      totalPrice: 0,
     },
   });
 };
@@ -113,8 +115,8 @@ export const isUserAdmin = async (userId: string) => {
   }
 };
 
-export const addItemToCart = (
-  id: bigint,
+export const addItemToState = (
+  id: string,
   name: string,
   price: number,
   totalAmount: number,
@@ -146,6 +148,31 @@ export const addItemToCart = (
     newCart[searchedIndex].summedPrice = summedPrice;
   }
   setCart(newCart, totalAmount + 1, totalPrice + price);
+  return newCart;
+};
+
+export const addItemToCart = (
+  id: string,
+  name: string,
+  price: number,
+  totalAmount: number,
+  totalPrice: number,
+  items: cartItem[],
+  setCart: (
+    currentItems: cartItem[],
+    quantity: number,
+    totalPrice: number
+  ) => void
+) => {
+  const newCart = addItemToState(
+    id,
+    name,
+    price,
+    totalAmount,
+    totalPrice,
+    items,
+    setCart
+  );
 
   // ADDING ITEM TO LOCALE STORAGE
   const localStorageObject = {
@@ -159,8 +186,6 @@ export const addItemToCart = (
   localStorage.setItem("cart", JSON.stringify(localStorageObject));
   // const localeStorageCart = JSON.parse(localStorage.getItem("cart") || "");
 };
-
-export const getCartFromLocalStorage = () => {};
 
 export const addItemToUserCart = async (
   userId: string,
@@ -188,7 +213,7 @@ export const addItemToUserCart = async (
 
   //  CHECK IF USER ALREADY HAS A CART
 
-  if (cart) {
+  if (cart && product) {
     const cartItems = await db.cartItem.findMany({
       where: {
         cartId: cart.id,
@@ -200,11 +225,10 @@ export const addItemToUserCart = async (
     );
 
     // CHECK IF USER HAS ALREADY THIS ITEM IN A CART
-
-    if (isAlreadyInCart) {
+    if (isAlreadyInCart !== undefined) {
       const amount = isAlreadyInCart.quantity + 1;
       const totalPrice = isAlreadyInCart.summedPrice + price;
-      await db.cartItem.updateMany({
+      const newCartItem = await db.cartItem.updateMany({
         where: {
           cartId: cart.id,
           productId: product?.id,
@@ -215,14 +239,16 @@ export const addItemToUserCart = async (
         },
       });
     } else {
-      await db.cartItem.create({
-        data: {
-          productId: product!.id,
-          cartId: cart.id,
-          quantity: 1,
-          summedPrice: price,
-        },
-      });
+      try {
+        const updatedItems = await db.cartItem.create({
+          data: {
+            productId: product.id,
+            cartId: cart.id,
+            quantity: 1,
+            summedPrice: price,
+          },
+        });
+      } catch (error) {}
     }
     await db.cart.update({
       where: {
@@ -233,20 +259,83 @@ export const addItemToUserCart = async (
         totalItems: cart!.totalItems + 1,
       },
     });
-  } else {
-    await db.cart.create({
-      data: {
-        userId: user!.id,
-      },
-    });
-    await db.cart.update({
-      where: {
-        userId: user!.id,
-      },
-      data: {
-        totalPrice: cart!.totalPrice + price,
-        totalItems: cart!.totalItems + 1,
-      },
-    });
   }
+};
+
+export const getCartFromDatabase = async (userId: string) => {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    const cart = await db.cart.findUnique({
+      where: {
+        userId: user?.id,
+      },
+    });
+
+    const cartItems = await db.cartItem.findMany({
+      where: {
+        cartId: cart?.id,
+      },
+    });
+
+    return {
+      items: cartItems,
+      totalQuantity: cart?.totalItems,
+      totalPrice: cart?.totalPrice,
+    };
+  } catch (error) {
+    return {
+      message: "Something gone wrong during fetching items from database",
+    };
+  }
+};
+
+export const sendDataFromStorageToDatabase = async (
+  userId: string,
+  items: cartItem[],
+  totalAmount: number,
+  totalPrice: number
+) => {
+  const cart = await db.cart.findUnique({
+    where: {
+      userId: userId,
+    },
+  });
+
+  items.map(async (item) => {
+    const product = await db.products.findUnique({
+      where: {
+        id: BigInt(item.id),
+      },
+    });
+
+    if (cart && product) {
+      try {
+        const updatedItems = await db.cartItem.create({
+          data: {
+            productId: product.id,
+            cartId: cart.id,
+            quantity: item.amount,
+            summedPrice: item.summedPrice,
+          },
+        });
+      } catch (error) {
+        console.log("error: " + error);
+      }
+    }
+  });
+
+  await db.cart.update({
+    where: {
+      userId: userId,
+    },
+    data: {
+      totalPrice: totalPrice,
+      totalItems: totalAmount,
+    },
+  });
 };

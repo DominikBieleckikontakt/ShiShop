@@ -8,7 +8,9 @@ import { useCartStore } from "@/lib/store";
 import { Product } from "@/types";
 import { Button } from "../server";
 import CategoriesList from "./CategoriesList";
-import { addItemToCart, addItemToUserCart } from "@/lib/utils";
+import { addItemToCart, addItemToState, addItemToUserCart } from "@/lib/utils";
+import toast from "react-hot-toast";
+import { toastThemedClasses } from "@/constants";
 
 const ProductItem = ({
   id,
@@ -27,6 +29,9 @@ const ProductItem = ({
   const onAddToCartHandler = async () => {
     if (userId) {
       const uId = id.toString();
+      toast.loading("Adding product...", {
+        className: toastThemedClasses,
+      });
       const res = await fetch(`/api/addToCart`, {
         method: "POST",
         headers: {
@@ -39,8 +44,39 @@ const ProductItem = ({
           price,
         }),
       });
+      const fetchedData = await res.json();
+      const { isSucceded } = fetchedData;
+      toast.dismiss();
+      isSucceded
+        ? toast.success("Product added to cart", {
+            className: toastThemedClasses,
+          })
+        : toast.error("Something gone wrong during adding product to cart", {
+            className: toastThemedClasses,
+          });
+      isSucceded &&
+        addItemToState(
+          id.toString(),
+          name,
+          price,
+          totalAmount,
+          totalPrice,
+          items,
+          setCart
+        );
     } else {
-      addItemToCart(id, name, price, totalAmount, totalPrice, items, setCart);
+      addItemToCart(
+        id.toString(),
+        name,
+        price,
+        totalAmount,
+        totalPrice,
+        items,
+        setCart
+      );
+      toast.success("Product added to cart", {
+        className: toastThemedClasses,
+      });
     }
   };
 

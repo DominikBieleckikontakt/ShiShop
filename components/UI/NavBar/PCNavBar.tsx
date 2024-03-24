@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Sun, Moon, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -14,23 +14,69 @@ import { Badge } from "../badge";
 
 const PCNavBar = ({
   isAdmin,
+  cart,
+  isNew,
 }: {
   isAdmin: string | boolean | null | undefined;
+  cart:
+    | {
+        items: [];
+        totalQuantity: number;
+        totalPrice: number;
+      }
+    | any;
+  isNew: boolean;
 }) => {
   const { setTheme, theme } = useTheme();
   const { userId } = useAuth();
   const pathname = usePathname();
   const totalAmount = useCartStore((state) => state.totalAmount);
+  const items = useCartStore((state) => state.items);
 
-  // GET DATA FROM LOCAL STORAGE AND PUT IN STATE
   const setCart = useCartStore((state) => state.setCart);
 
-  if (typeof window !== "undefined" && !userId) {
-    const { items, totalAmount, totalPrice } = JSON.parse(
-      localStorage.getItem("cart")!
-    );
-    setCart(items, totalAmount, totalPrice);
-  }
+  useEffect(() => {
+    if (!userId) {
+      // GET DATA FROM LOCAL STORAGE AND PUT IN STATE
+      if (typeof window !== "undefined") {
+        if (localStorage.getItem("cart") !== null) {
+          const localObject = JSON.parse(localStorage.getItem("cart")!);
+          setCart(
+            localObject.items,
+            localObject.totalAmount,
+            localObject.totalPrice
+          );
+        } else {
+          setCart([], 0, 0);
+        }
+      }
+    } else {
+      if (
+        typeof window !== "undefined" &&
+        localStorage.getItem("cart") !== null &&
+        isNew
+      ) {
+        const { items, totalAmount, totalPrice } = JSON.parse(
+          localStorage.getItem("cart")!
+        );
+        fetch("/api/sendToDb", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId,
+            items,
+            totalAmount,
+            totalPrice,
+          }),
+        })
+          .then((res) => res.json())
+          .then(() => localStorage.removeItem("cart"));
+      }
+      setCart(cart.items || [], cart.totalQuantity || 0, cart.totalPrice || 0);
+    }
+  }, [userId, cart]);
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");
@@ -80,6 +126,7 @@ const PCNavBar = ({
               </Badge>
             </Link>
           </Button>
+          <div className="absolute top-16 w-24 bg-slate-400">sadas</div>
         </div>
         <Button
           variant="outline"

@@ -6,7 +6,7 @@ type arrayIndex = {
 };
 
 export type cartItem = {
-  id: bigint;
+  id: string;
   name: string;
   price: number;
   amount: number;

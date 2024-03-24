@@ -8,3 +8,5 @@ export const navbarLinks = [
     url: "/shop",
   },
 ];
+
+export const toastThemedClasses = `dark:bg-[#222222] dark:text-white`;

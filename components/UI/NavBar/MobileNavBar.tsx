@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Sun, Moon, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -15,8 +15,18 @@ import { Badge } from "../badge";
 
 const MobileNavBar = ({
   isAdmin,
+  cart,
+  isNew,
 }: {
   isAdmin: string | boolean | null | undefined;
+  cart:
+    | {
+        items: [];
+        totalQuantity: number;
+        totalPrice: number;
+      }
+    | any;
+  isNew: boolean;
 }) => {
   const { setTheme, theme } = useTheme();
   const [isHidden, setIsHidden] = useState(true);
@@ -25,6 +35,50 @@ const MobileNavBar = ({
   const totalAmount = useCartStore((state) => state.totalAmount);
 
   const pathname = usePathname();
+  const setCart = useCartStore((state) => state.setCart);
+
+  useEffect(() => {
+    if (!userId) {
+      // GET DATA FROM LOCAL STORAGE AND PUT IN STATE
+      if (typeof window !== "undefined") {
+        if (localStorage.getItem("cart") !== null) {
+          const localObject = JSON.parse(localStorage.getItem("cart")!);
+          setCart(
+            localObject.items,
+            localObject.totalAmount,
+            localObject.totalPrice
+          );
+        } else {
+          setCart([], 0, 0);
+        }
+      }
+    } else {
+      if (
+        typeof window !== "undefined" &&
+        localStorage.getItem("cart") !== null &&
+        isNew
+      ) {
+        const { items, totalAmount, totalPrice } = JSON.parse(
+          localStorage.getItem("cart")!
+        );
+        fetch("/api/sendToDb", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId,
+            items,
+            totalAmount,
+            totalPrice,
+          }),
+        })
+          .then((res) => res.json())
+          .then(() => localStorage.removeItem("cart"));
+      }
+      setCart(cart.items || [], cart.totalQuantity || 0, cart.totalPrice || 0);
+    }
+  }, [userId, cart]);
 
   const toggleTheme = () => {
     theme === "dark" && setTheme("light");

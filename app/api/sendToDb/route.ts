@@ -1,10 +1,10 @@
-import { addItemToUserCart } from "@/lib/utils";
+import { sendDataFromStorageToDatabase } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { userId, uId, name, price } = await req.json();
-    await addItemToUserCart(userId, uId, name, price);
+    const { userId, items, totalAmount, totalPrice } = await req.json();
+    await sendDataFromStorageToDatabase(userId, items, totalAmount, totalPrice);
   } catch (error) {
     return NextResponse.json({ message: "error", isSucceded: false });
   }
